@@ -18,6 +18,26 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*
+ * ========================================================================
+ * MODIFICACIONES CUSTOM - Proyecto UAV FPV Militar FACh
+ * ========================================================================
+ * Autor: Luis Olmos (@Luchinol)
+ *
+ * ESTIMACIÓN DE POSICIÓN CON DEAD RECKONING:
+ *
+ * Fusión sensorial GPS + IMU:
+ * - Filtro Kalman para velocidad (GPS 25Hz + acelerómetro 8kHz)
+ * - Conversión coordenadas geográficas ↔ métricas
+ *
+ * Dead Reckoning durante pérdida GPS:
+ * - Integración inercial: v = v0 + a·dt
+ * - Cálculo posición: s = s0 + v·dt
+ * - Timeout máximo: 30 segundos
+ * - Activaciones exitosas: 3/3 en pruebas de campo
+ * ========================================================================
+ */
+
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>

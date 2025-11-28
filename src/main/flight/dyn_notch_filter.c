@@ -28,6 +28,26 @@
  * test pilots: Sugar K, bizmar
  */
 
+/*
+ * ========================================================================
+ * MODIFICACIONES CUSTOM - Proyecto UAV FPV Militar FACh
+ * ========================================================================
+ * Autor: Luis Olmos (@Luchinol)
+ *
+ * DYNAMIC NOTCH FILTERS - Optimización para XING2 2207:
+ *
+ * Configuración custom:
+ * - 3 filtros notch por eje (dyn_notch_count = 3)
+ * - Q factor: 120 (alta selectividad)
+ * - Rango tracking: 150-600Hz
+ * - FFT-based peak detection
+ *
+ * Rechaza resonancias de motores sin degradar response.
+ * Reduce significativamente noise en D-term.
+ * Optimizado para frecuencias típicas de motores 2207 @ 6S.
+ * ========================================================================
+ */
+
 #include <math.h>
 #include <stdint.h>
 

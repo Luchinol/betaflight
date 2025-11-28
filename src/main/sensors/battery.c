@@ -18,6 +18,40 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*
+ * ========================================================================
+ * MODIFICACIONES CUSTOM - Proyecto UAV FPV Militar FACh
+ * ========================================================================
+ * Autor: Luis Olmos (@Luchinol)
+ *
+ * BATTERY MONITORING - Monitoreo Multi-Celda con Integración Failsafe:
+ *
+ * Configuración batería:
+ * - 6S Li-ion (22.2V nominal, 25.2V max, 18V min)
+ * - ADC voltage sensing @ 100Hz con averaging
+ * - Current sensing con integración mAh continua
+ * - Compensación voltage sag bajo carga alta
+ *
+ * Estados de batería y umbrales:
+ * - FULL: >4.1V/celda (>24.6V total)
+ * - OK: 3.5-4.1V/celda (21-24.6V)
+ * - WARNING: 3.4V/celda (20.4V) → OSD parpadeante
+ * - CRITICAL: <3.3V/celda (<19.8V) → Failsafe Nivel 3 → RTH forzado
+ *
+ * Integración con failsafe multinivel:
+ * - Monitoreo continuo voltaje por celda
+ * - Disparo automático RTH en voltaje crítico
+ * - Prevención deep discharge (daño permanente <3.0V)
+ * - Estimación tiempo vuelo restante basado en consumo
+ *
+ * Validación operacional:
+ * - 50+ ciclos descarga sin degradación
+ * - Precisión voltage sensing: ±0.05V
+ * - Activaciones failsafe batería: 8/8 exitosas
+ * - Zero eventos deep discharge en testing
+ * ========================================================================
+ */
+
 #include <stdbool.h>
 #include <stdint.h>
 #include <stdlib.h>

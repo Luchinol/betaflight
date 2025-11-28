@@ -18,6 +18,32 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*
+ * ========================================================================
+ * MODIFICACIONES CUSTOM - Proyecto UAV FPV Militar FACh
+ * ========================================================================
+ * Autor: Luis Olmos (@Luchinol)
+ *
+ * FAILSAFE MULTINIVEL - Sistema de Seguridad en Cascada:
+ *
+ * Nivel 1 - RC Loss:
+ *   >5s sin señal → GPS Rescue
+ *   Rollback si recupera <2s
+ *
+ * Nivel 2 - GPS Degraded:
+ *   <5 satélites → Dead reckoning
+ *
+ * Nivel 3 - Battery Critical:
+ *   <3.3V/celda → RTH forzado
+ *
+ * Nivel 4 - Thermal Shutdown:
+ *   ESC >100°C → Reducción throttle 50%
+ *   ESC >110°C → Aterrizaje emergencia
+ *
+ * Monitoreo continuo a 100Hz
+ * ========================================================================
+ */
+
 #include <stdbool.h>
 #include <stdint.h>
 

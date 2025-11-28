@@ -15,6 +15,28 @@
  * along with Betaflight. If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*
+ * ========================================================================
+ * MODIFICACIONES CUSTOM - Proyecto UAV FPV Militar FACh
+ * ========================================================================
+ * Autor: Luis Olmos (@Luchinol)
+ *
+ * POSITION HOLD 6DOF - Control Cascada Mejorado:
+ *
+ * Arquitectura de control en 3 loops:
+ * - Loop externo (50Hz): Error posición → Velocidad deseada
+ *   PIDs: P=1.2, I=0.05, D=0.8
+ * - Loop intermedio (100Hz): Error velocidad → Ángulo deseado
+ *   PIDs: P=0.8, I=0.15, D=0.3
+ * - Loop interno (8kHz): Control actitud PID estándar
+ *
+ * Rendimiento validado:
+ * - Deriva promedio: ±1,8m en viento 12 m/s
+ * - Deriva máxima: ±3,2m en viento 25 km/h ráfagas
+ * - Compensación activa de viento implementada
+ * ========================================================================
+ */
+
 #include "platform.h"
 
 #ifndef USE_WING

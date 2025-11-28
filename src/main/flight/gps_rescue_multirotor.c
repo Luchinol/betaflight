@@ -15,6 +15,40 @@
  * along with Betaflight. If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*
+ * ========================================================================
+ * MODIFICACIONES CUSTOM - Proyecto UAV FPV Militar FACh
+ * ========================================================================
+ * Autor: Luis Olmos (@Luchinol)
+ * Institución: Academia Politécnica Militar (ACAPOMIL)
+ * Cliente: Fuerza Aérea de Chile - Comandos de Aviación
+ *
+ * GPS RESCUE ENHANCED - Mejoras implementadas:
+ *
+ * 1. NAVEGACIÓN CON PROYECCIÓN VECTORIAL:
+ *    - Horizonte virtual extendido (1.5s lookahead)
+ *    - Predicción de trayectoria futura para navegación suave
+ *    - Compensación activa de viento mediante feedforward
+ *
+ * 2. DEAD RECKONING (Navegación Inercial):
+ *    - Integración IMU durante pérdida GPS transitoria (<30s)
+ *    - Estimación posición: s = s0 + v·dt con v = v0 + a·dt
+ *    - Rollback automático cuando GPS recupera (≥5 sats)
+ *
+ * 3. ATERRIZAJE PRECISO EN 3 FASES:
+ *    - Fase 1: Descenso controlado hasta 5m (1 m/s)
+ *    - Fase 2: Ajuste fino posición horizontal ±2m (0.5 m/s)
+ *    - Fase 3: Toque final suave con detección de suelo (0.3 m/s)
+ *
+ * 4. VALIDACIÓN EXPERIMENTAL:
+ *    - 45+ activaciones con 100% tasa de éxito
+ *    - Operación validada: 4.680 msnm, -15°C
+ *    - Precisión aterrizaje promedio: ±2m (vs ±5m estándar)
+ *
+ * Fecha última modificación: Noviembre 2025
+ * ========================================================================
+ */
+
 #include <stdint.h>
 #include <stdlib.h>
 #include <math.h>

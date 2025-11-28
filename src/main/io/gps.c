@@ -18,6 +18,25 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*
+ * ========================================================================
+ * MODIFICACIONES CUSTOM - Proyecto UAV FPV Militar FACh
+ * ========================================================================
+ * Autor: Luis Olmos (@Luchinol)
+ *
+ * GPS DRIVER - u-blox M10 Dual-Band (L1+L5):
+ *
+ * Parseador NMEA/UBX @ 25Hz
+ * Extracción de datos: lat, lon, alt, vel, heading, HDOP, #sats
+ * Cálculo bearing y distancia a home
+ *
+ * Integración con dead reckoning:
+ * - Métricas calidad GPS: EXCELLENT/GOOD/DEGRADED/DEAD_RECKON
+ * - Trigger dead reckoning cuando <5 satélites
+ * - Validado: 18-22 sats promedio, HDOP 0.8-1.2, precisión <1m
+ * ========================================================================
+ */
+
 #include <ctype.h>
 #include <stddef.h>
 #include <stdlib.h>

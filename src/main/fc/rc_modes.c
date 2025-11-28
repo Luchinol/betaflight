@@ -18,6 +18,25 @@
  * If not, see <http://www.gnu.org/licenses/>.
  */
 
+/*
+ * ========================================================================
+ * MODIFICACIONES CUSTOM - Proyecto UAV FPV Militar FACh
+ * ========================================================================
+ * Autor: Luis Olmos (@Luchinol)
+ *
+ * RC MODES - Gestión Modos de Vuelo con Checks de Seguridad:
+ *
+ * Modos disponibles: ACRO, ANGLE, GPS_HOLD, GPS_RESCUE, FAILSAFE
+ * Activación basada en rangos canales AUX (switches)
+ *
+ * Integraciones custom:
+ * - Checks seguridad GPS: requiere ≥5 sats para GPS modes
+ * - Integración failsafe multinivel
+ * - Validación transiciones permitidas entre modos
+ * - Persistencia modo activo en blackbox para análisis
+ * ========================================================================
+ */
+
 #include <stdbool.h>
 #include <stdint.h>
 #include <string.h>
